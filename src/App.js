@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import Appointment from "./Pages/Home/Appointment/Appointment/Appointment";
 import Home from "./Pages/Home/Home/Home";
 
 function App() {
@@ -12,6 +13,9 @@ function App() {
                </Route>
                <Route path="/home">
                   <Home></Home>
+               </Route>
+               <Route path="/appointment">
+                  <Appointment></Appointment>
                </Route>
             </Switch>
          </Router>

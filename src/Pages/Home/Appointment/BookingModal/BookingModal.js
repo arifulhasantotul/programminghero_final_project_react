@@ -1,7 +1,8 @@
 import { Backdrop, Button, Fade, Modal, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
+import useAuth from "../../../../hooks/useAuth";
 
 const style = {
    position: "absolute",
@@ -15,16 +16,60 @@ const style = {
    p: 4,
 };
 
-const BookingModal = ({ date, booking, openBooking, handleBookingClose }) => {
+const BookingModal = ({
+   setBookingSuccess,
+   date,
+   booking,
+   openBooking,
+   handleBookingClose,
+}) => {
+   const { user } = useAuth();
    const { name, time } = booking;
+   const initialInfo = {
+      patientName: user.displayName,
+      email: user.email,
+      phone: "",
+   };
+   const [bookingInfo, setBookingInfo] = useState(initialInfo);
 
    const handleBookingSubmit = (e) => {
-      alert("Submitting");
       // collect data
+      const appointment = {
+         ...bookingInfo,
+         time,
+         serviceName: name,
+         date: date.toLocaleDateString(),
+      };
+
       // send to the server
-      handleBookingClose();
+      const url = "https://vast-plains-74884.herokuapp.com/appointments";
+      fetch(url, {
+         method: "POST",
+         headers: {
+            "content-type": "application/json",
+         },
+         body: JSON.stringify(appointment),
+      })
+         .then((res) => res.json())
+         .then((data) => {
+            if (data.insertedId) {
+               setBookingSuccess(true);
+               handleBookingClose();
+            }
+         });
+
       e.preventDefault();
    };
+
+   const handleOnBlur = (e) => {
+      const field = e.target.name;
+      const value = e.target.value;
+      const newInfo = { ...bookingInfo };
+      newInfo[field] = value;
+      console.log(newInfo);
+      setBookingInfo(newInfo);
+   };
+
    return (
       <Modal
          aria-labelledby="transition-modal-title"
@@ -52,19 +97,27 @@ const BookingModal = ({ date, booking, openBooking, handleBookingClose }) => {
                   <TextField
                      sx={{ width: "90%", m: 1 }}
                      id="outlined-size-small"
-                     placeholder="Your Name"
+                     defaultValue={user.displayName}
+                     label="Name"
+                     name="patientName"
+                     onBlur={handleOnBlur}
                      size="small"
                   />
                   <TextField
                      sx={{ width: "90%", m: 1 }}
                      id="outlined-size-small"
-                     placeholder="Your email"
+                     defaultValue={user.email}
+                     label="Email"
+                     name="email"
+                     onBlur={handleOnBlur}
                      size="small"
                   />
                   <TextField
                      sx={{ width: "90%", m: 1 }}
                      id="outlined-size-small"
-                     placeholder="Phone Number"
+                     label="Number"
+                     onBlur={handleOnBlur}
+                     name="phone"
                      size="small"
                   />
                   <TextField

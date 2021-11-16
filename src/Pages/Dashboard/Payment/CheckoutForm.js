@@ -14,10 +14,8 @@ const CheckoutForm = ({ appointment }) => {
    const [processing, setProcessing] = useState(false);
 
    const { price, patientName, _id } = appointment;
-   console.log(price);
    useEffect(() => {
-      console.log("click");
-      const url = `http://localhost:8080/create-payment-intent`;
+      const url = `https://vast-plains-74884.herokuapp.com/create-payment-intent`;
       fetch(url, {
          method: "POST",
          headers: {
@@ -27,7 +25,6 @@ const CheckoutForm = ({ appointment }) => {
       })
          .then((res) => res.json())
          .then((data) => setClientSecret(data.clientSecret));
-      console.log("clicked 2");
    }, [price]);
 
    const handleSubmit = async (e) => {
@@ -81,7 +78,7 @@ const CheckoutForm = ({ appointment }) => {
             transition: paymentIntent.client_secret.slice("_secret")[0],
             last4: paymentMethod.last4,
          };
-         const url = `http://localhost:8080/appointments/${_id}`;
+         const url = `https://vast-plains-74884.herokuapp.com/appointments/${_id}`;
          fetch(url, {
             method: "PUT",
             headers: {

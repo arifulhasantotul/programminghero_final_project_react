@@ -1,7 +1,7 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 
 const stripePromise = loadStripe(
@@ -12,7 +12,7 @@ const Payment = () => {
    const { appointmentId } = useParams();
    const [appointment, setAppointment] = useState();
    useEffect(() => {
-      const url = `http://localhost:8080/appointments/${appointmentId}`;
+      const url = `https://vast-plains-74884.herokuapp.com/appointments/${appointmentId}`;
       fetch(url)
          .then((res) => res.json())
          .then((data) => setAppointment(data));

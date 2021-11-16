@@ -32,6 +32,7 @@ const Navigation = () => {
                </Link>
                {user?.email ? (
                   <Box>
+                     <Typography>{user.email}</Typography>
                      <NavLink
                         style={{ textDecoration: "none", color: "#fff" }}
                         to="/dashboard"

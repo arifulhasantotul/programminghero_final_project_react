@@ -24,7 +24,7 @@ const BookingModal = ({
    handleBookingClose,
 }) => {
    const { user } = useAuth();
-   const { name, time } = booking;
+   const { name, time, price } = booking;
    const initialInfo = {
       patientName: user.displayName,
       email: user.email,
@@ -37,9 +37,11 @@ const BookingModal = ({
       const appointment = {
          ...bookingInfo,
          time,
+         price,
          serviceName: name,
          date: date.toLocaleDateString(),
       };
+      console.log(appointment);
 
       // send to the server
       const url = "https://vast-plains-74884.herokuapp.com/appointments";
@@ -111,6 +113,16 @@ const BookingModal = ({
                      name="email"
                      onBlur={handleOnBlur}
                      size="small"
+                  />
+                  <TextField
+                     sx={{ width: "90%", m: 1 }}
+                     id="outlined-size-small"
+                     defaultValue={price}
+                     label="Price"
+                     name="price"
+                     onBlur={handleOnBlur}
+                     size="small"
+                     disabled
                   />
                   <TextField
                      sx={{ width: "90%", m: 1 }}

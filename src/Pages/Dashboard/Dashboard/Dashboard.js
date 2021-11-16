@@ -24,6 +24,7 @@ import AdminRoute from "../../AdminRoute/AdminRoute";
 import AddDoctor from "../AddDoctor/AddDoctor";
 import DashHome from "../DashHome/DashHome";
 import MakeAdmin from "../MakeAdmin/MakeAdmin";
+import Payment from "../Payment/Payment";
 
 const drawerWidth = 200;
 
@@ -40,6 +41,7 @@ const Dashboard = (props) => {
       <div>
          <Toolbar />
          <Divider />
+         {/* ui showing */}
          <Link to="/appointment">
             <Button>Appointment</Button>
          </Link>
@@ -56,6 +58,7 @@ const Dashboard = (props) => {
                </Link>
             </Box>
          )}
+         {/* ui showing  */}
          <List>
             {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
                <ListItem button key={text}>
@@ -148,6 +151,9 @@ const Dashboard = (props) => {
                <Route exact path={path}>
                   <DashHome />
                </Route>
+               <AdminRoute path={`${path}/payment/:appointmentId`}>
+                  <Payment />
+               </AdminRoute>
                <AdminRoute path={`${path}/makeAdmin`}>
                   <MakeAdmin />
                </AdminRoute>

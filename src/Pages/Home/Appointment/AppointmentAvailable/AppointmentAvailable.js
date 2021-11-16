@@ -8,17 +8,43 @@ const bookings = [
       name: "Teeth Orthodonics",
       time: "08.00AM - 09.00AM",
       space: 10,
+      price: 15,
    },
    {
       id: 2,
       name: "Cosmetic Dentistry",
       time: "09.00AM - 10.00AM",
       space: 10,
+      price: 25,
    },
-   { id: 3, name: "Teeth Cleaning", time: "10.00AM - 11.00AM", space: 10 },
-   { id: 4, name: "Cavity Protection", time: "11.00AM -12.00PM", space: 10 },
-   { id: 5, name: "Pediatric Dental", time: "06.00PM - 07.00PM", space: 10 },
-   { id: 6, name: "Oral Surgery", time: "07.00PM - 08.00PM", space: 10 },
+   {
+      id: 3,
+      name: "Teeth Cleaning",
+      time: "10.00AM - 11.00AM",
+      space: 10,
+      price: 35,
+   },
+   {
+      id: 4,
+      name: "Cavity Protection",
+      time: "11.00AM -12.00PM",
+      space: 10,
+      price: 45,
+   },
+   {
+      id: 5,
+      name: "Pediatric Dental",
+      time: "06.00PM - 07.00PM",
+      space: 10,
+      price: 45,
+   },
+   {
+      id: 6,
+      name: "Oral Surgery",
+      time: "07.00PM - 08.00PM",
+      space: 10,
+      price: 55,
+   },
 ];
 const AppointmentAvailable = ({ date }) => {
    const [bookingSuccess, setBookingSuccess] = useState(false);

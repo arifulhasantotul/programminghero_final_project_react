@@ -23,20 +23,26 @@ const Payment = () => {
          <h5>Patient: {appointment?.patientName}</h5>
          <h5>Service: {appointment?.serviceName}</h5>
          <h5>Pay: ${appointment?.price}</h5>
-         <Elements stripe={stripePromise}>
-            <CheckoutForm appointment={appointment} />
-         </Elements>
+         {appointment?.price && (
+            <Elements stripe={stripePromise}>
+               <CheckoutForm appointment={appointment} />
+            </Elements>
+         )}
       </div>
    );
 };
 
 export default Payment;
 /* 
-1.install stripe and stripe react
+1. install stripe and stripe react
 2. set publishable key
 3. make Elements 
 4. Checkout form
 ----------
 5. create payment method
+6. server create payment intent api
+7. load client secret
+8. confirm card payment
+9. handle user payment
 
 */

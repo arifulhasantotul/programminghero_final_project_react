@@ -20,6 +20,7 @@ const useFirebase = () => {
    const [authError, setAuthError] = useState("");
    const [admin, setAdmin] = useState(false);
    const [token, setToken] = useState("");
+   const [adminLoading, setAdminLoading] = useState(true);
 
    const auth = getAuth();
 
@@ -103,10 +104,14 @@ const useFirebase = () => {
    }, [auth]);
 
    useEffect(() => {
+      setAdminLoading(true);
       const url = `https://vast-plains-74884.herokuapp.com/users/${user.email}`;
       fetch(url)
          .then((res) => res.json())
-         .then((data) => setAdmin(data.admin));
+         .then((data) => setAdmin(data.admin))
+         .finally(() => {
+            setAdminLoading(false);
+         });
    }, [user.email]);
 
    const logout = () => {
@@ -136,6 +141,7 @@ const useFirebase = () => {
       user,
       admin,
       token,
+      adminLoading,
       registerUser,
       loginUser,
       signInWithGoogle,

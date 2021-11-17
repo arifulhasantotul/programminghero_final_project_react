@@ -10,7 +10,7 @@ import {
    Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import login from "../../../images/login.png";
 
@@ -19,7 +19,7 @@ const Login = () => {
       useAuth();
    const [loginData, setLoginData] = useState({});
    const location = useLocation();
-   const history = useHistory();
+   const navigate = useNavigate();
    const handleOnChange = (e) => {
       const field = e.target.name;
       const value = e.target.value;
@@ -28,12 +28,12 @@ const Login = () => {
       setLoginData(newLoginData);
    };
    const handleLoginSubmit = (e) => {
-      loginUser(loginData.email, loginData.password, location, history);
+      loginUser(loginData.email, loginData.password, location, navigate);
       e.preventDefault();
    };
 
-   const handleGoogleSignIn = (location, history) => {
-      signInWithGoogle(location, history);
+   const handleGoogleSignIn = () => {
+      signInWithGoogle(location, navigate);
    };
 
    return (

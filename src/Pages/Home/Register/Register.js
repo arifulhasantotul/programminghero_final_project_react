@@ -9,13 +9,13 @@ import {
    Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import login from "../../../images/login.png";
 
 const Register = () => {
    const { registerUser, isLoading, user, authError } = useAuth();
-   const history = useHistory();
+   const navigate = useNavigate();
    const [loginData, setLoginData] = useState({});
 
    const handleOnChange = (e) => {
@@ -34,7 +34,7 @@ const Register = () => {
          loginData.email,
          loginData.password,
          loginData.name,
-         history
+         navigate
       );
       e.preventDefault();
    };
